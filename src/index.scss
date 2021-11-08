@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+}
+
+
+//----flex style-----------------------
+.f-row {
+  display: flex;
+  flex-direction: row;
+}
+.f-col{
+  display: flex;
+  flex-direction: column;
+}
+.j-center {
+  justify-content: center;
+}
+
+.a-center{
+  align-items: center;
+}
+//----border style---------------------
+.br-4px{
+  border-radius: 4px;
+}
+
+.b-black-1px{
+  border: 1px solid black;
+}
+
+.b-primary-1px{
+  border: 1px solid #234acd;
+}
