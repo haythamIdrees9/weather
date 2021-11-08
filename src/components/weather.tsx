@@ -39,7 +39,7 @@ function Weather() {
     } else {
         weathereUI =
             <div className="container f-col a-center">
-                <Select placeholder="Select country" noOptionMessage="Sorry there is no matched country!!" height={40} width={264} options={cities}  onChange={(e) => { onChange(e) }} />
+                <Select placeholder="Select country..." noOptionMessage="Sorry there is no matched country!!" height={40} width={264} options={cities}  onChange={(e) => { onChange(e) }} />
                 <ul>
                     <div onClick={getWeatherData} key={item.location.name}>
                         <div className="name">
