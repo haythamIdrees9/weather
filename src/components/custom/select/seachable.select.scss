@@ -3,6 +3,15 @@
     & .select {
         cursor: pointer;
         position: relative;
+
+        & .option-not-selected, .option-selected{
+            line-height: 2.4;
+            text-align: left;
+            padding-left: 8px;
+        }
+        & .option-not-selected{
+            color: #818181;
+        }
         & img {
             width: 24px;
             height: 24px;
