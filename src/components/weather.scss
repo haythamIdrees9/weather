@@ -1,0 +1,10 @@
+.container{
+    
+    & .data{
+        color: red;
+    }
+    
+   & .name{
+        color: green;
+    }
+}
