@@ -1,13 +1,22 @@
+import React from "react";
 import { useState } from "react";
 import "./seachable.select.scss"
 function Select(props: { width: number, height: number, options: string[], onChange: (value: any) => void }) {
     const [opened, setOpened] = useState<boolean>(false);
     const [closed, setClosed] = useState<boolean>(false);
+    const [InputRef, setInputRef] = useState<React.RefObject<any>>(React.createRef());
     function handleChange(value: any) {
         props.onChange(value.target.value);
     }
 
     function toggle() {
+        // if select opened then focus on input; else clear input text
+        if (!opened) {
+            InputRef?.current.focus();
+        } else if (InputRef?.current?.value) {
+            InputRef.current.value = "";
+        }
+
         setOpened(!opened);
         setClosed(true);
     }
@@ -19,7 +28,7 @@ function Select(props: { width: number, height: number, options: string[], onCha
             </div>
             <div className="options br-4px" style={{ top: (props.height + 4) + 'px' }}>
                 <div className="input-contaienr">
-                    <input type="text" name="filter" onChange={handleChange} />
+                    <input type="text" name="filter" onChange={handleChange} ref={InputRef} />
                 </div>
                 <div className="options-list" >
 
