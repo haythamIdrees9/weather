@@ -42,7 +42,7 @@
             }
         }
         & .options-list {
-            overflow:  hidden auto;
+            overflow: hidden auto;
             max-height: calc(100% - 70px);
             & .option {
                 height: 40px;
@@ -56,6 +56,30 @@
                     background-color: rgb(206, 218, 252);
                 }
             }
+        }
+
+        /* width */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #d1d1d1;
+            border-radius: 4px;
+
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
         }
     }
 
