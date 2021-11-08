@@ -26,13 +26,16 @@
         overflow: hidden;
         background-color: white;
         & .input-contaienr {
-            padding: 16px;
+            padding: 16px 16px 16px 12px;
             width: calc(100% - 32px);
             height: 35px;
             & input {
                 width: 100%;
-                height: 100%;
+                height: 35px;
                 padding: 0;
+                border: 1px solid #234acd;
+                border-radius: 4px;
+                padding-left: 4px;
                 &:focus {
                     outline: none;
                 }
@@ -40,7 +43,7 @@
         }
         & .options-list {
             overflow:  hidden auto;
-            max-height: 230px;
+            max-height: calc(100% - 70px);
             & .option {
                 height: 40px;
                 width: 100%;
