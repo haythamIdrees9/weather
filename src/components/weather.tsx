@@ -5,7 +5,7 @@ import "./weather.scss"
 
 function Weather() {
     const [error, setError] = useState<any>(null);
-    const [isloaded, setIsLoaded] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
     const [item, setItems] = useState<any>([]);
     const [counter, setCounter] = useState<number>(0);
     const cities = ["palestine","USA","palestine1" ,"palestine2","palestine3","palestine4","palestine5"]
@@ -34,12 +34,12 @@ function Weather() {
     let weathereUI = <span></span>;
     if (error) {
         weathereUI = <div>Error: {error.message}</div>
-    } else if (!isloaded) {
+    } else if (!isLoaded) {
         weathereUI = <div>Loading...</div>
     } else {
         weathereUI =
             <div className="container f-col a-center">
-                <Select height={40} width={264} options={cities}  onChange={(e) => { onChange(e) }} />
+                <Select placeholder="Select country..." noOptionMessage="Sorry there is no matched country!!" height={40} width={264} options={cities}  onChange={(e) => { onChange(e) }} />
                 <ul>
                     <div onClick={getWeatherData} key={item.location.name}>
                         <div className="name">
