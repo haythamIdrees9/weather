@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import "./searchable.select.scss"
-function Select(props: { placeholder:string,noOptionMessage: string, width: number, height: number, options: string[], onChange: (value: any) => void }) {
+function Select(props: {placeholder:string,noOptionMessage: string, width: number, height: number, options: string[], onChange: (value: any) => void }) {
     const [opened, setOpened] = useState<boolean>(false);// true if select is opened
     const [closed, setClosed] = useState<boolean>(false);// true if select opened then closed
     const [options, setOptions] = useState<string[]>([]);// list of options that will be filtered on user input
@@ -71,7 +71,7 @@ function Select(props: { placeholder:string,noOptionMessage: string, width: numb
 
 
     return (
-        <div className={"container f-row j-center " + ((opened) ? 'opened' : (closed) ? 'closed' : '')} ref={componentRef} >
+        <div className={"select-container f-row j-center " + ((opened) ? 'opened' : (closed) ? 'closed' : '')} ref={componentRef} >
             <div className="select br-4px b-black-1px" style={{ width: props.width + 'px', height: props.height + 'px' }} onClick={toggle}>
                 {selectedOption ?
                     <div className="option-selected">
@@ -92,7 +92,7 @@ function Select(props: { placeholder:string,noOptionMessage: string, width: numb
 
                     {
                         options.length > 0 ?
-                            options.map(option => <div className="option" onClick={() => onOptionSelected(option)}> {option} </div>)
+                            options.map(option => <div key={option} className="option" onClick={() => onOptionSelected(option)}> {option} </div>)
                             : <div>{props.noOptionMessage}</div>
                     }
 

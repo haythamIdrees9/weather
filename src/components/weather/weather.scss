@@ -1,10 +1,49 @@
-.container{
-    
-    & .data{
+@import "../../variables";
+
+.container {
+    width: 100%;
+    height: 100%;
+    color: white;
+    & .options {
+        width: 100%;
+        & .select-day {
+            min-width: 200px;
+        }
+    }
+
+    & .cards {
+        padding: 16px;
+        background: rgba(10, 70, 120, 0.3);
+        border-radius: 10px;
+        box-shadow: 0 0 5px rgb(0 0 0 / 50%);
+        color: white !important;
+        width: 618px;
+        height: 420px;
+        flex-wrap: wrap;
+        align-content: space-between;
+        & .subscription-card-container {
+            padding: 8px;
+            background: rgba(10, 70, 120, 0.3);
+            border:2px solid $primary-color;
+            height: 180px;
+            width: 150px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgb(0 0 0 / 50%);
+            color: white !important;
+            cursor: pointer;
+            & img{
+                width: 80px;
+                height: 80px;
+                margin: 16px;
+                filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(108deg) brightness(104%) contrast(104%);
+            }
+        }
+    }
+    & .data {
         color: red;
     }
-    
-   & .name{
+
+    & .name {
         color: green;
     }
 }

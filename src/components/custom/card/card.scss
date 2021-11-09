@@ -1,0 +1,32 @@
+@import "../../../variables";
+
+.card-container {
+    padding: 8px;
+    background: rgba(10, 70, 120, 0.3);
+    height: 180px;
+    width: 150px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgb(0 0 0 / 50%);
+    color: white !important;
+    & .date {
+        margin-top: 8px;
+    }
+    & .period {
+        margin-top: 24px;
+        width: 100%;
+    }
+
+    & .values {
+        margin-top: 8px;
+        & .value {
+            width: 35%;
+            & img {
+                width: 32px;
+                height: 32px;
+            }
+        }
+    }
+    & .day-summary{
+        margin-top: 24px;
+    }
+}

@@ -1,8 +1,12 @@
 @import "../../../variables";
 
-.container {
+.select-container {
     position: relative;
+    width: fit-content;
+    height: fit-content;
+    color: black;
     & .select {
+        background-color: white;
         cursor: pointer;
         position: relative;
 

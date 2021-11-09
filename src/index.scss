@@ -2,34 +2,37 @@
 
 body {
   margin: 0;
+  overflow: hidden;
 }
-
 
 //----flex style-----------------------
 .f-row {
   display: flex;
   flex-direction: row;
 }
-.f-col{
+.f-col {
   display: flex;
   flex-direction: column;
 }
 .j-center {
   justify-content: center;
 }
+.j-between {
+  justify-content: space-between;
+}
 
-.a-center{
+.a-center {
   align-items: center;
 }
 //----border style---------------------
-.br-4px{
+.br-4px {
   border-radius: 4px;
 }
 
-.b-black-1px{
+.b-black-1px {
   border: 1px solid black;
 }
 
-.b-primary-1px{
+.b-primary-1px {
   border: 1px solid $primary-color;
 }
