@@ -5,9 +5,9 @@ function Select(props: { placeholder:string,noOptionMessage: string, width: numb
     const [opened, setOpened] = useState<boolean>(false);// true if select is opened
     const [closed, setClosed] = useState<boolean>(false);// true if select opened then closed
     const [options, setOptions] = useState<string[]>([]);// list of options that will be filtered on user input
-    const [InputRef, setInputRef] = useState<React.RefObject<any>>(React.createRef());
-    const [componentRef, setComponentRef] = useState<React.RefObject<any>>(React.createRef());
-    const [selectedOption, setSelectedOption] = useState<string>("");
+    const [InputRef, setInputRef] = useState<React.RefObject<any>>(React.createRef()); // to interact with input element
+    const [componentRef, setComponentRef] = useState<React.RefObject<any>>(React.createRef()); // to indicate if user click outside the select component
+    const [selectedOption, setSelectedOption] = useState<string>(""); 
 
     function handleChange(event: any) {
         let userInput = event?.target?.value;
@@ -23,6 +23,7 @@ function Select(props: { placeholder:string,noOptionMessage: string, width: numb
         setSelectedOption(option);
         setOpened(false);
         onClosed();
+        props.onChange(option);
     }
 
     useEffect(() => {
