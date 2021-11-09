@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import "./seachable.select.scss"
+import "./searchable.select.scss"
 function Select(props: { placeholder:string,noOptionMessage: string, width: number, height: number, options: string[], onChange: (value: any) => void }) {
     const [opened, setOpened] = useState<boolean>(false);// true if select is opened
     const [closed, setClosed] = useState<boolean>(false);// true if select opened then closed
