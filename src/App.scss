@@ -4,7 +4,7 @@
   padding: 16px;
   color: white;
   overflow-y: auto;
-
+  background-color: rgb(18,52,81);
   & .img-br{
     position: fixed;
     filter: blur(7px);
@@ -25,3 +25,26 @@
     height: 32px;
   }
 }
+        /* width */
+        ::-webkit-scrollbar {
+          width: 8px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+          background: #d1d1d1;
+          border-radius: 4px;
+
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+          background: #888;
+          border-radius: 4px;
+
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+          background: #555;
+      }
