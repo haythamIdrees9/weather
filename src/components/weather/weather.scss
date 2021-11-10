@@ -5,7 +5,7 @@
     height: 100%;
     color: white;
     padding-bottom: 32px;
-    & .current-degree{
+    & .current-degree {
         font-size: 24px;
         margin-bottom: 24px;
         min-height: 32px;
@@ -18,77 +18,4 @@
         }
     }
 
-    & .cards {
-        padding: 16px;
-        background: rgba(10, 70, 120, 0.3);
-        border-radius: 10px;
-        box-shadow: 0 0 5px rgb(0 0 0 / 50%);
-        color: white !important;
-        width: 618px;
-        height: 420px;
-        flex-wrap: wrap;
-        align-content: space-between;
-        user-select: none;
-        position: relative;
-        max-width: calc(100% - 32px);
-        gap: 16px;
-        height: fit-content;
-        // & *:not(.loading-sun){
-        //     transition: transform  .3s ease-in-out;
-        // }
-        // & .flip-card{
-        //     transform: rotateY(90deg);
-        // }
-        @media  (max-width:459px) {
-            justify-content: center;
-        }
-        & .loading{
-            position: absolute;
-            font-size: 24px;
-            height: 100%;
-            width: 100%;
-            background: rgba(10, 70, 120, 0.6);
-            left: 0;
-            top: 0;
-            & .loading-sun{
-                animation: loading-rotate 5s infinite ease-in-out;
-            }
-        }
-        & .loaded{
-            display: none;
-        }
-
-        @keyframes loading-rotate {
-            from {
-              transform: rotate(0deg);
-            }
- 
-            to{
-              transform: rotate(1080deg);
-            }
-          }
-        
-        & .subscription-card-container {
-            line-height: 1.4;
-            padding: 8px;
-            background: rgba(10, 70, 120, 0.3);
-            border:2px solid $primary-color;
-            height: 180px;
-            width: 146px;
-            border-radius: 10px;
-            box-shadow: 0 0 5px rgb(0 0 0 / 50%);
-            color: white !important;
-            cursor: pointer;
-            & img{
-                width: 80px;
-                height: 80px;
-                margin: 16px;
-                filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(108deg) brightness(104%) contrast(104%);
-            }
-        }
-    }
-
-    & .name {
-        color: green;
-    }
 }

@@ -1,7 +1,7 @@
 import "./card.scss"
-function Card(props: { day: string, date: string, morningDegree: number, EveningDegree: number, summery: string,class:string }) {
+function Card(props: { day: string, date: string, morningDegree: number, EveningDegree: number, summery: string,class:string,index:number,onClick: (value: any) => void }) {
     return (
-        <div className={'card-container '+ props.class }>
+        <div className={'card-container '+ props.class } onClick={() => props.onClick(props.index)}>
             <div className="day-name">
                 {props.day}
             </div>

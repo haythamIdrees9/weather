@@ -10,7 +10,7 @@
     color: white !important;
     user-select: none;
     transition: transform  .4s ease-in-out;
-
+    cursor: pointer;
     &.flip-card{
         transform: rotateY(90deg);
     }
