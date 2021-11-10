@@ -6,9 +6,11 @@ import Card from "../custom/card/card";
 function Weather() {
     const [error, setError] = useState<any>(null);
     const [isLoaded, setIsLoaded] = useState(false);
+    let   [loading, setLoading] = useState(false);
+    const [flipCard, setFlipCard] = useState(false);
     const [items, setItems] = useState<any>([]);
-    const [counter, setCounter] = useState<number>(0);
-    const cities = ["Paris", "Landon", "Athens", "Amsterdam", "Bratislava", "Brussels", "Bucharest"]
+    const [currentCity, setCurrentCity] = useState<string>("");
+    const cities = ["Paris", "Landon", "Athens", "Amsterdam", "Bratislava", "Brussels", "Bucharest"];
     useEffect(() => {
         getWeatherData(cities[0]);
     }, [])
@@ -16,71 +18,88 @@ function Weather() {
     function onChange(e: string) {
         getWeatherData(e);
     }
-    function getWeatherData(city:string) {
-
+    function getWeatherData(city: string) {
+        if (currentCity === city) {
+            return;
+        }
+        setCurrentCity(city)
+        setLoading(true);
         WeatherService.getWeatherData(city).then(res => res.json())
-            .then((result) => {
-                if(Array.isArray(result?.forecast?.forecastday)){
-                    for (const item of result.forecast.forecastday) {
-                        item.day.maxtemp_c = Math.round(item.day.maxtemp_c);
-                        item.day.mintemp_c = Math.round(item.day.mintemp_c);
-                    }
-                }
-                setItems(result)
-                setIsLoaded(true);
-                setCounter(counter + 1);
-            },
+            .then(
+                onGetData,
                 (error) => {
                     setIsLoaded(true);
                     setError(error)
                 })
     }
 
-    let weathereUI = <span></span>;
+    function onGetData(result: any) {
+        if (Array.isArray(result?.forecast?.forecastday)) {
+            for (const item of result.forecast.forecastday) {
+                item.day.maxtemp_c = Math.round(item.day.maxtemp_c);
+                item.day.mintemp_c = Math.round(item.day.mintemp_c);
+            }
+        }
+        setFlipCard(true);
+        setLoading(false);
+        setTimeout(() => {
+            setItems(result)
+        }, 400)
+        setTimeout(() => {
+            setFlipCard(false);
+        }, 400)
+        setIsLoaded(true);
+    }
+
+
+    let weatherUI = <div></div>;
+
     if (error) {
-        weathereUI = <div>Error: {error.message}</div>
+        weatherUI = <div>Error: {error.message}</div>
     } else if (!isLoaded) {
-        weathereUI = <div>Loading...</div>
-    } else {
-        weathereUI =
+        weatherUI = <div>Loading...</div>
+    } else if (items?.forecast?.forecastday) {
+
+        weatherUI =
             <div className="container  f-col a-center">
+                <div key={items.location.name} className="current-degree">
+                    <div className="data">
+                        {(items.current && !loading) ? 'current degree ' + items.current.temp_c : ' '} <sup>{(items.current && !loading) ? 'c' : ''} </sup>
+                    </div>
+                </div>
                 <div className="options f-row j-between a-center">
-                    <Select placeholder="Select country..." noOptionMessage="Sorry there is no matched country!!" height={40} width={264} options={cities} onChange={(e) => { onChange(e) }} />
+                    <Select placeholder="Select country..." noOptionMessage="Sorry there is no matched City!!" height={40} width={264} options={cities} selectedIndex={0} onChange={(e) => { onChange(e) }} />
                     <div className="select-day">
                         {/* select your country */}
                     </div>
                 </div>
-                <ul>
-                    <div onClick={(e) => getWeatherData(`${e}`)} key={items.location.name}>
-                        <div className="name">
-                            {items.location.name}:
-                        </div>
-                        <div className="data">
-                            current degree {items.current.temp_c} {counter}
+
+                <div className="cards f-row j-between">
+
+                    <div className={(loading ? 'loading f-col j-center a-center' : 'loaded') + (flipCard ? ' flip-card' : '')}>
+                        <img src="/loading-sun.png" className="loading-sun"></img>
+                        loading...
+                    </div>
+                    <Card class={flipCard ? 'flip-card' : ''} day="Sunday" date={items.forecast.forecastday[0].date} morningDegree={items.forecast.forecastday[0].day.maxtemp_c} EveningDegree={items.forecast.forecastday[0].day.mintemp_c} summery="cloudy" />
+                    <Card class={flipCard ? 'flip-card' : ''} day="Sunday" date={items.forecast.forecastday[1].date} morningDegree={items.forecast.forecastday[1].day.maxtemp_c} EveningDegree={items.forecast.forecastday[1].day.mintemp_c} summery="cloudy" />
+                    <Card class={flipCard ? 'flip-card' : ''} day="Sunday" date={items.forecast.forecastday[2].date} morningDegree={items.forecast.forecastday[2].day.maxtemp_c} EveningDegree={items.forecast.forecastday[2].day.mintemp_c} summery="cloudy" />
+                    <Card class={flipCard ? 'flip-card' : ''} day="Sunday" date="20/11/2021" morningDegree={20} EveningDegree={10} summery="cloudy" />
+                    <Card class={flipCard ? 'flip-card' : ''} day="Sunday" date="20/11/2021" morningDegree={20} EveningDegree={10} summery="cloudy" />
+
+                    <div className="subscription-card-container">
+                        <div >
+                            <img src="/eye.svg" alt="" />
+
+                            subscribe now and get 14 days of forecasting
                         </div>
                     </div>
-                    <div className="cards f-row j-between">
-                        <Card day="Sunday" date={items.forecast.forecastday[0].date} morningDegree={items.forecast.forecastday[0].day.maxtemp_c} EveningDegree={items.forecast.forecastday[0].day.mintemp_c} summery="cloudy" />
-                        <Card day="Sunday" date={items.forecast.forecastday[1].date} morningDegree={items.forecast.forecastday[1].day.maxtemp_c} EveningDegree={items.forecast.forecastday[1].day.mintemp_c} summery="cloudy" />
-                        <Card day="Sunday" date={items.forecast.forecastday[2].date} morningDegree={items.forecast.forecastday[2].day.maxtemp_c} EveningDegree={items.forecast.forecastday[2].day.mintemp_c} summery="cloudy" />
-                        <Card day="Sunday" date="20/11/2021" morningDegree={20} EveningDegree={10} summery="cloudy" />
-                        <Card day="Sunday" date="20/11/2021" morningDegree={20} EveningDegree={10} summery="cloudy" />
 
-                        <div className="subscription-card-container">
-                            <div >
-                                <img src="/eye.svg" alt="" />
+                </div>
 
-                                subscribe now and get 14 days of forecasting
-                            </div>
-                        </div>
-
-                    </div>
-
-                </ul>
             </div>
     }
 
-    return weathereUI;
+    return weatherUI;
 
 }
 

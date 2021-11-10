@@ -8,6 +8,13 @@
     border-radius: 10px;
     box-shadow: 0 0 5px rgb(0 0 0 / 50%);
     color: white !important;
+    user-select: none;
+    transition: transform  .4s ease-in-out;
+
+    &.flip-card{
+        transform: rotateY(90deg);
+    }
+    
     & .date {
         margin-top: 8px;
     }

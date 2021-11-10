@@ -1,7 +1,7 @@
 import "./card.scss"
-function Card(props: { day: string, date: string, morningDegree: number, EveningDegree: number, summery: string }) {
+function Card(props: { day: string, date: string, morningDegree: number, EveningDegree: number, summery: string,class:string }) {
     return (
-        <div className="card-container">
+        <div className={'card-container '+ props.class }>
             <div className="day-name">
                 {props.day}
             </div>
