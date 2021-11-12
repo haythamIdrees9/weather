@@ -12,6 +12,7 @@ function Weather() {
     const [items, setItems] = useState<any>([]);
     const [currentCity, setCurrentCity] = useState<string>("");
     const [dayHourlyIndex, setHourlyDisplay] = useState<number>(-1);
+    const [hourlyData, setHourlyData] = useState<any>(<span></span>);
 
     const cities = ["Paris", "Landon", "Athens", "Amsterdam", "Bratislava", "Brussels", "Bucharest"];
     useEffect(() => {
@@ -55,13 +56,59 @@ function Weather() {
     }
 
     function onDaySelect(index: number) {
-        console.log('index', index);
         setFlipCards(true)
         setTimeout(() => {
             setHourlyDisplay(index)
             setFlipCards(false)
+            setHourlyData(setHourlyDataValue(index));
         }, 400)
 
+    }
+
+    function switchToDailyData() {
+        onDaySelect(-1);
+    }
+
+    function setHourlyDataValue(index: number) {
+        if (index >= 3) {
+            index = 0;// I don't get the 5 days data because I need to pay first
+        }
+        if (index >= 0) {
+            let keyIndex = 0;
+            return (
+
+                items.forecast.forecastday[index].hour.map((hour: any) =>
+
+                    <div className="f-row j-between hour-data" key={keyIndex++}>
+                        <div className="time py-19px">
+                            {getTimeFormatted(new Date(hour?.time).getHours() + 1)}
+                        </div>
+                        <div className="weather-img">
+                            <img src={hour.condition.icon} alt="" />
+                        </div>
+                        <div className="py-19px temp">
+                            <span>{hour.temp_c}</span><sup className="ml-1px">o</sup>
+                        </div>
+                        <div className="py-19px real-feel-container">
+                            <span className="real-feel">
+                                RealFeel
+                            </span>
+                            {hour.dewpoint_c}
+                        </div>
+                    </div>
+                )
+            )
+        } else {
+            return <div>no data</div>
+        }
+    }
+
+    function getTimeFormatted(time: number) {
+        if (time > 12) {
+            return `${time - 12} pm`
+        } else {
+            return `${time} am`
+        }
     }
 
 
@@ -86,8 +133,8 @@ function Weather() {
                     <Select placeholder="Select country..." noOptionMessage="Sorry there is no matched City!!" height={40} width={264} options={cities} selectedIndex={0} onChange={(e) => { onChange(e) }} />
                 </div>
 
-                <div >
-                    <CardData dayHourlyIndex={dayHourlyIndex} loading={loading} flipCard={flipCard} flipCards={flipCards} items={items} onDaySelect={(index) => onDaySelect(index)} />
+                <div className="w-100p f-row j-center">
+                    <CardData hourlyData={hourlyData} dayHourlyIndex={dayHourlyIndex} loading={loading} flipCard={flipCard} flipCards={flipCards} items={items} onDaySelect={(index) => onDaySelect(index)} switchToDailyData={switchToDailyData} />
                 </div>
 
             </div>

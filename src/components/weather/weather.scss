@@ -17,5 +17,21 @@
             min-width: 200px;
         }
     }
+}
+.hour-data-container {
+    & .hour-data {
+        align-content: flex-start;
+        & .time {
+            width: 48px;
+            text-align: end;
+        }
+        & .py-10px {
+            padding: 10px 0;
+        }
+        & img {
+            width: 48px;
+            height: 48px;
+        }
 
+    }
 }

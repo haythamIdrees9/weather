@@ -1,7 +1,7 @@
 @import "../../../variables";
 
-.cards-data{
-    max-width: calc(100vw - 32px);
+.cards-data {
+    max-width: 100%;
 
     transition: transform 0.4s ease-in-out;
     &.flip-cards {
@@ -19,12 +19,12 @@
             animation: loading-rotate 5s infinite ease-in-out;
         }
     }
-            
+
     & .loaded {
         display: none;
     }
 
-    & .daily-data{
+    & .daily-data {
         padding: 16px;
         background: rgba(10, 70, 120, 0.3);
         border-radius: 10px;
@@ -36,7 +36,7 @@
         align-content: space-between;
         user-select: none;
         position: relative;
-        max-width: calc(100% - 32px) ;
+        max-width: calc(100% - 32px);
         gap: 16px;
         height: fit-content;
 
@@ -48,12 +48,12 @@
             from {
                 transform: rotate(0deg);
             }
-            
+
             to {
                 transform: rotate(1080deg);
             }
         }
-        
+
         & .subscription-card-container {
             line-height: 1.4;
             padding: 8px;
@@ -73,13 +73,14 @@
             }
         }
     }
-
-    &.hourly{
-        .daily-data{
-         display: none;
+    & .hourly-data {
+        display: none;
+    }
+    &.hourly {
+        .daily-data {
+            display: none;
         }
-         .hourly-data{
-            padding: 16px;
+        .hourly-data {
             background: rgba(10, 70, 120, 0.3);
             border-radius: 10px;
             box-shadow: 0 0 5px rgb(0 0 0 / 50%);
@@ -90,10 +91,64 @@
             align-content: space-between;
             user-select: none;
             position: relative;
-            max-width: calc(100% - 32px);
+            max-width: 100% !important;
             gap: 16px;
             height: 60vh;
             max-height: 60vh;
+            display: block !important;
+            & .hours-list {
+                padding: 0 16px;
+                overflow: hidden auto;
+                max-height: calc(100% - 42px);
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                & .weather-img {
+                    width: 32px;
+                }
+
+                & .real-feel-container {
+                    min-width: 73px;
+                    text-align: start;
+                    & .real-feel {
+                        margin-right: 3px;
+                        font-size: 12px;
+                    }
+                }
+                & .temp {
+                    min-width: 64px;
+                }
+                & .time {
+                    min-width: 48px;
+                }
             }
+            & .title {
+                height: 40px;
+                position: sticky;
+                top: 0;
+                width: 100%;
+                background-color: #123451;
+                & .back {
+                    position: absolute;
+                    left: 16px;
+                    top: 8px;
+                    width: 24px;
+                    height: 24px;
+                    filter: invert(100%) sepia(88%) saturate(0%) hue-rotate(237deg) brightness(103%) contrast(101%);
+                    -webkit-filter: invert(100%) sepia(88%) saturate(0%) hue-rotate(237deg) brightness(103%)
+                        contrast(101%);
+                }
+            }
+        }
+    }
+}
+@media (max-width: 361px) {
+    .hourly-data {
+     & .hours-list {
+        padding: 0 8px !important;
+        & .weather-img {
+            display: none !important;
+        }
+    }
     }
 }

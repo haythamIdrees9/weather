@@ -18,8 +18,15 @@ body {
 .j-center {
   justify-content: center;
 }
+.j-start {
+  justify-content: flex-start;
+}
 .j-between {
   justify-content: space-between;
+}
+
+.j-end{
+  justify-content: flex-end;
 }
 
 .a-center {
@@ -30,10 +37,21 @@ body {
   border-radius: 4px;
 }
 
+.py-19px{
+  padding: 19px 0 ;
+}
+
+.ml-1px{
+  margin-left: 1px;
+}
 .b-black-1px {
   border: 1px solid black;
 }
 
 .b-primary-1px {
   border: 1px solid $primary-color;
+}
+
+.w-100p{
+  width: 100%;
 }
