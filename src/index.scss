@@ -2,34 +2,56 @@
 
 body {
   margin: 0;
+  overflow: hidden;
+    font-family: system-ui;
+
 }
-
-
 //----flex style-----------------------
 .f-row {
   display: flex;
   flex-direction: row;
 }
-.f-col{
+.f-col {
   display: flex;
   flex-direction: column;
 }
 .j-center {
   justify-content: center;
 }
+.j-start {
+  justify-content: flex-start;
+}
+.j-between {
+  justify-content: space-between;
+}
 
-.a-center{
+.j-end{
+  justify-content: flex-end;
+}
+
+.a-center {
   align-items: center;
 }
 //----border style---------------------
-.br-4px{
+.br-4px {
   border-radius: 4px;
 }
 
-.b-black-1px{
+.py-19px{
+  padding: 19px 0 ;
+}
+
+.ml-1px{
+  margin-left: 1px;
+}
+.b-black-1px {
   border: 1px solid black;
 }
 
-.b-primary-1px{
+.b-primary-1px {
   border: 1px solid $primary-color;
+}
+
+.w-100p{
+  width: 100%;
 }

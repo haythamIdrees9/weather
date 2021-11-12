@@ -1,8 +1,9 @@
 const WeatherService = {
 
-    getWeatherData: function () {
-        return fetch('https://api.weatherapi.com/v1/current.json?key=24258f8832a940d4839184700210711&q=London&aqi=no')
+    getWeatherData: function (city:string) {
+        return fetch(`http://api.weatherapi.com/v1/forecast.json?key=24258f8832a940d4839184700210711&q=${city}&days=10&aqi=no&alerts=no`)
     }
+
 
 }
 

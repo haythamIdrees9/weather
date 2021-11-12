@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import "./searchable.select.scss"
-function Select(props: { placeholder:string,noOptionMessage: string, width: number, height: number, options: string[], onChange: (value: any) => void }) {
+function Select(props: {placeholder:string,noOptionMessage: string, width: number, height: number,selectedIndex:number, options: string[], onChange: (value: any) => void }) {
     const [opened, setOpened] = useState<boolean>(false);// true if select is opened
     const [closed, setClosed] = useState<boolean>(false);// true if select opened then closed
     const [options, setOptions] = useState<string[]>([]);// list of options that will be filtered on user input
@@ -20,6 +20,9 @@ function Select(props: { placeholder:string,noOptionMessage: string, width: numb
     }
 
     function onOptionSelected(option: string) {
+        if(option === selectedOption){
+            return;
+        }
         setSelectedOption(option);
         setOpened(false);
         onClosed();
@@ -28,6 +31,9 @@ function Select(props: { placeholder:string,noOptionMessage: string, width: numb
 
     useEffect(() => {
         setOptions([...props.options])
+        if(props.selectedIndex >= 0){
+            setSelectedOption(props.options[props.selectedIndex])
+        }
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
             // on destroy remove event listener 
@@ -49,10 +55,12 @@ function Select(props: { placeholder:string,noOptionMessage: string, width: numb
      */
     function onClosed() {
         // handle action after closing the select to enhance the User experience 
-        setTimeout(() => {
-            InputRef.current.value = "";
-            setOptions([...props.options])
-        }, 350)
+        if (InputRef?.current) {
+            setTimeout(() => {
+                InputRef.current.value = "";
+                setOptions([...props.options])
+            }, 350)
+        }
     }
 
     /**
@@ -71,7 +79,7 @@ function Select(props: { placeholder:string,noOptionMessage: string, width: numb
 
 
     return (
-        <div className={"container f-row j-center " + ((opened) ? 'opened' : (closed) ? 'closed' : '')} ref={componentRef} >
+        <div className={"select-container f-row j-center " + ((opened) ? 'opened' : (closed) ? 'closed' : '')} ref={componentRef} >
             <div className="select br-4px b-black-1px" style={{ width: props.width + 'px', height: props.height + 'px' }} onClick={toggle}>
                 {selectedOption ?
                     <div className="option-selected">
@@ -89,10 +97,9 @@ function Select(props: { placeholder:string,noOptionMessage: string, width: numb
                     <input type="text" name="filter" onChange={handleChange} ref={InputRef} placeholder="filter..." />
                 </div>
                 <div className="options-list" >
-
                     {
                         options.length > 0 ?
-                            options.map(option => <div className="option" onClick={() => onOptionSelected(option)}> {option} </div>)
+                            options.map(option => <div key={option} className={'option ' + ((selectedOption === option)?'selected-option':'')} onClick={() => onOptionSelected(option)}> {option} </div>)
                             : <div>{props.noOptionMessage}</div>
                     }
 
