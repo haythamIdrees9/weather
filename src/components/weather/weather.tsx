@@ -5,7 +5,7 @@ import "./weather.scss"
 import CardData from "./card-data/card-data";
 import CurrentDayInfo from "./current-day-info/current-day-info";
 function Weather() {
-    const tabIndicatorValues = [{ width: '116px', left: '0px' }, { width: '84px', left: '125px' }];
+    const tabIndicatorValues = [{ width: '50px', left: '-5px' }, { width: '84px', left: '55px' }];
     const [error, setError] = useState<any>(null);
     const [isLoaded, setIsLoaded] = useState(false);
     let [loading, setLoading] = useState(false);
@@ -119,6 +119,9 @@ function Weather() {
      * switch between daily information or forecasting
      */
     function setDisplayType(value: boolean) {
+        if(value === isCurrentDayInfo){
+            return;
+        }
         setFlipCards(true);
         let tabIndicatorValuesIndex = (value) ? 0 : 1;
         setCardsTabIndicatorStyle(tabIndicatorValues[tabIndicatorValuesIndex])
@@ -150,8 +153,8 @@ function Weather() {
                         <img src="/back.svg" alt="" onClick={switchToDailyData} />
                     </div>
                     <div className="tabs f-row  j-center">
-                        <div className="tab" onClick={() => setDisplayType(true)}>current day info</div>
-                        <div className="tab" onClick={() => setDisplayType(false)}>forecasting</div>
+                        <div className="tab" onClick={() => setDisplayType(true)}><div className={"tab-line-1"+((isCurrentDayInfo)?' tab-line-1-selected':'')}></div>today</div>
+                        <div className="tab" onClick={() => setDisplayType(false)}><div className={"tab-line-2"+((isCurrentDayInfo)?'':' tab-line-2-selected')}></div>next 5 days</div>
                         <div className="tab-indicator" style={{ width: cardsTabIndicatorStyle.width, left: cardsTabIndicatorStyle.left }}></div>
                     </div>
                 </div>
