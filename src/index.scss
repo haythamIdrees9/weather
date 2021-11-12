@@ -3,8 +3,7 @@
 body {
   margin: 0;
   overflow: hidden;
-    font-family: system-ui;
-
+  font-family: system-ui;
 }
 //----flex style-----------------------
 .f-row {
@@ -25,7 +24,7 @@ body {
   justify-content: space-between;
 }
 
-.j-end{
+.j-end {
   justify-content: flex-end;
 }
 
@@ -37,11 +36,14 @@ body {
   border-radius: 4px;
 }
 
-.py-19px{
-  padding: 19px 0 ;
+.px-16px {
+  padding: 0 16px;
+}
+.py-19px {
+  padding: 19px 0;
 }
 
-.ml-1px{
+.ml-1px {
   margin-left: 1px;
 }
 .b-black-1px {
@@ -52,6 +54,11 @@ body {
   border: 1px solid $primary-color;
 }
 
-.w-100p{
+//--------------
+
+.w-100p {
   width: 100%;
+}
+.w-99p {
+  width: 99%;
 }

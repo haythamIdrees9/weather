@@ -3,7 +3,9 @@ import WeatherService from "../../services/weather.services";
 import Select from "../custom/select/searchable-select";
 import "./weather.scss"
 import CardData from "./card-data/card-data";
+import CurrentDayInfo from "./current-day-info/current-day-info";
 function Weather() {
+    const tabIndicatorValues = [{ width: '116px', left: '0px' }, { width: '84px', left: '125px' }];
     const [error, setError] = useState<any>(null);
     const [isLoaded, setIsLoaded] = useState(false);
     let [loading, setLoading] = useState(false);
@@ -13,6 +15,8 @@ function Weather() {
     const [currentCity, setCurrentCity] = useState<string>("");
     const [dayHourlyIndex, setHourlyDisplay] = useState<number>(-1);
     const [hourlyData, setHourlyData] = useState<any>(<span></span>);
+    const [isCurrentDayInfo, setIsCurrentDayInfo] = useState<Boolean>(true);
+    const [cardsTabIndicatorStyle, setCardsTabIndicatorStyle] = useState<{ width: string, left: string }>(tabIndicatorValues[0]);
 
     const cities = ["Paris", "Landon", "Athens", "Amsterdam", "Bratislava", "Brussels", "Bucharest"];
     useEffect(() => {
@@ -111,6 +115,19 @@ function Weather() {
         }
     }
 
+    /**
+     * switch between daily information or forecasting
+     */
+    function setDisplayType(value: boolean) {
+        setFlipCards(true);
+        let tabIndicatorValuesIndex = (value) ? 0 : 1;
+        setCardsTabIndicatorStyle(tabIndicatorValues[tabIndicatorValuesIndex])
+        setTimeout(() => {
+            setIsCurrentDayInfo(value)
+            setFlipCards(false)
+        }, 400)
+    }
+
 
 
 
@@ -124,17 +141,28 @@ function Weather() {
 
         weatherUI =
             <div className="container  f-col a-center">
-                <div key={items.location.name} className="current-degree">
-                    <div className="data">
-                        {(items.current && !loading) ? 'current degree ' + items.current.temp_c : ' '} <sup>{(items.current && !loading) ? 'c' : ''} </sup>
-                    </div>
-                </div>
                 <div className="options f-row j-center a-center">
                     <Select placeholder="Select country..." noOptionMessage="Sorry there is no matched City!!" height={40} width={264} options={cities} selectedIndex={0} onChange={(e) => { onChange(e) }} />
                 </div>
 
-                <div className="w-100p f-row j-center">
-                    <CardData hourlyData={hourlyData} dayHourlyIndex={dayHourlyIndex} loading={loading} flipCard={flipCard} flipCards={flipCards} items={items} onDaySelect={(index) => onDaySelect(index)} switchToDailyData={switchToDailyData} />
+                <div className="tabs-container f-row  j-center" style= {{width: (dayHourlyIndex === -1 || isCurrentDayInfo) ? '620px' : '430px' }} >
+                    <div className={"back "} style={{ display: (dayHourlyIndex === -1 || isCurrentDayInfo) ? 'none' : '' }}>
+                        <img src="/back.svg" alt="" onClick={switchToDailyData} />
+                    </div>
+                    <div className="tabs f-row  j-center">
+                        <div className="tab" onClick={() => setDisplayType(true)}>current day info</div>
+                        <div className="tab" onClick={() => setDisplayType(false)}>forecasting</div>
+                        <div className="tab-indicator" style={{ width: cardsTabIndicatorStyle.width, left: cardsTabIndicatorStyle.left }}></div>
+                    </div>
+                </div>
+                <div className={"f-col a-center cards-container" + ((flipCards) ? ' flip-cards' : '')} 
+                style= {{ padding: (dayHourlyIndex === -1 || isCurrentDayInfo) ? '16px 0' : '0 0  16px 0',width: (dayHourlyIndex === -1 || isCurrentDayInfo) ? '620px' : '400px' }} >
+                    <div style={{ display: (isCurrentDayInfo) ? 'none' : 'flex',width: (dayHourlyIndex === -1 || isCurrentDayInfo) ? '99%' : '100%' }} className="w-99p  j-center" >
+                        <CardData hourlyData={hourlyData} dayHourlyIndex={dayHourlyIndex} loading={loading} flipCard={flipCard} flipCards={false} items={items} onDaySelect={(index) => onDaySelect(index)} switchToDailyData={switchToDailyData} />
+                    </div>
+                    <div style={{ display: (isCurrentDayInfo) ? 'flex' : 'none' }} className="w-99p  j-center">
+                        <CurrentDayInfo flipCards={false} currentDayData={{}} />
+                    </div>
                 </div>
 
             </div>
