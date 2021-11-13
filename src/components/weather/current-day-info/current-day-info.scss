@@ -5,15 +5,32 @@
     width: 100%;
     padding: 16px;
     gap: 48px;
-    & .info{
+    & .loading {
+        position: absolute;
+        font-size: 24px;
+        height: 100%;
+        width: 100%;
+        background: rgba(10, 70, 120, 0.6);
+        left: 0;
+        top: 0;
+        z-index: 2;
+        & .loading-sun {
+            animation: loading-rotate 5s infinite ease-in-out;
+        }
+    }
+    & .loaded {
+        display: none;
+    }
+
+    & .info {
         width: 160px;
         & img {
             width: 100px;
             height: 100px;
         }
     }
-        & .degree {
-            font-size: 48px;
+    & .degree {
+        font-size: 48px;
     }
 }
 @media (max-width: 450px) {

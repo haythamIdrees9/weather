@@ -174,7 +174,7 @@ function Weather() {
                         <CardData hourlyData={hourlyData} dayHourlyIndex={dayHourlyIndex} loading={loading} flipCard={flipCard} flipCards={false} items={items} onDaySelect={(index) => onDaySelect(index)} switchToDailyData={switchToDailyData} />
                     </div>
                     <div style={{ display: (isCurrentDayInfo) ? 'flex' : 'none' }} className="w-99p  j-center">
-                        <CurrentDayInfo flipCards={false} currentDayData={(items) ? items.current : {}} />
+                        <CurrentDayInfo flipCards={false} currentDayData={(items) ? items.current : {}} loading={loading} />
                     </div>
                 </div>
 

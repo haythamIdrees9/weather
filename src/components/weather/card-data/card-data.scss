@@ -15,6 +15,7 @@
         background: rgba(10, 70, 120, 0.6);
         left: 0;
         top: 0;
+        z-index: 2;
         & .loading-sun {
             animation: loading-rotate 5s infinite ease-in-out;
         }
