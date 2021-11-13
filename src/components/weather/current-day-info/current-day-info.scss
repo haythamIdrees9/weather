@@ -1,24 +1,25 @@
 @import "../../../variables";
 
-// .current-day-info {
-//     max-width: 100%;
-
-//     transition: transform 0.4s ease-in-out;
-//     &.flip-cards {
-//         transform: rotateY(90deg);
-//     }
-//     padding: 16px;
-//     background: rgba(10, 70, 120, 0.3);
-//     border-radius: 10px;
-//     box-shadow: 0 0 5px rgb(0 0 0 / 50%);
-//     color: white !important;
-//     width: 618px;
-//     height: 420px;
-//     flex-wrap: wrap;
-//     align-content: space-between;
-//     user-select: none;
-//     position: relative;
-//     max-width: calc(100% - 32px);
-//     gap: 16px;
-//     height: fit-content;
-// }
+.current-day-info {
+    max-width: 100%;
+    width: 100%;
+    padding: 16px;
+    gap: 48px;
+    & .info{
+        width: 160px;
+        & img {
+            width: 100px;
+            height: 100px;
+        }
+    }
+        & .degree {
+            font-size: 48px;
+    }
+}
+@media (max-width: 450px) {
+    .current-day-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+}

@@ -1,4 +1,4 @@
-import Card from "../../custom/card/card";
+import Card from "../card/card";
 import "./card-data.scss";
 
 function onSubscriptionClicked() {
