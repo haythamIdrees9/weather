@@ -1,9 +1,11 @@
 import "./card.scss"
-function Card(props: { dayData:any,day: string,class:string,index:number,onClick: (value: any) => void }) {
+function Card(props: { dayData:any,date: string,class:string,index:number,onClick: (value: any) => void }) {
+    const weekDays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+    const day = `${weekDays[new Date(props.date).getDay()]}`;
     return (
         <div className={'card-container '+ props.class } onClick={() => props.onClick(props.index)}>
             <div className="day-name">
-                {props.day}
+                {day}
             </div>
             <div className="date">
                 {props.dayData.date}
