@@ -28,17 +28,14 @@ body {
   justify-content: flex-end;
 }
 
-.a-start{
+.a-start {
   align-items: flex-start;
 }
 .a-center {
   align-items: center;
 }
-//----border style---------------------
-.br-4px {
-  border-radius: 4px;
-}
 
+// ---- padding
 .px-16px {
   padding: 0 16px;
 }
@@ -46,22 +43,42 @@ body {
   padding: 19px 0;
 }
 
+//----margin
+
 .ml-1px {
   margin-left: 1px;
 }
+
+//----border style---------------------
+.br-4px {
+  border-radius: 4px;
+}
+
 .b-black-1px {
   border: 1px solid black;
 }
 
-.b-primary-1px {
-  border: 1px solid $primary-color;
-}
-
-//--------------
-
-.w-100p {
-  width: 100%;
-}
+//--------- width
 .w-99p {
   width: 99%;
+}
+
+
+// --- generic scroll bar style
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #d1d1d1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #123451;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
