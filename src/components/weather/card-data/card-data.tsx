@@ -22,13 +22,12 @@ function CardData(props: { dayHourlyIndex: number, hourlyData: any, loading: boo
                     <Card onClick={(index) => props.onDaySelect(index)} index={0} class={props.flipCard ? 'flip-card' : ''} day="Sunday" dayData={props.items.forecast.forecastday[0]} />
                     <Card onClick={(index) => props.onDaySelect(index)} index={1} class={props.flipCard ? 'flip-card' : ''} day="Sunday" dayData={props.items.forecast.forecastday[1]} />
                     <Card onClick={(index) => props.onDaySelect(index)} index={2} class={props.flipCard ? 'flip-card' : ''} day="Sunday" dayData={props.items.forecast.forecastday[2]} />
-                    <Card onClick={(index) => props.onDaySelect(index)} index={3} class={props.flipCard ? 'flip-card' : ''} day="Sunday" dayData={props.items.forecast.forecastday[0]} />
-                    <Card onClick={(index) => props.onDaySelect(index)} index={4} class={props.flipCard ? 'flip-card' : ''} day="Sunday" dayData={props.items.forecast.forecastday[0]} />
+                    <Card onClick={(index) => props.onDaySelect(index)} index={3} class={props.flipCard ? 'flip-card' : ''} day="Sunday" dayData={props.items.forecast.forecastday[3]} />
+                    <Card onClick={(index) => props.onDaySelect(index)} index={4} class={props.flipCard ? 'flip-card' : ''} day="Sunday" dayData={props.items.forecast.forecastday[4]} />
 
                     <div className="subscription-card-container" onClick={onSubscriptionClicked}>
                         <div >
                             <img src="/eye.svg" alt="" />
-
                             subscribe now and get 14 days of forecasting
                         </div>
                     </div>

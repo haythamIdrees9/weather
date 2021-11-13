@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import "./searchable.select.scss"
+import "./searchable.select.scss";
+
+/**
+ * @author Haytham Idrees
+ * I created this custom select to use it instead of use react select, to reduce the bundle size and exercise on react
+ * @param props 
+ */
 function Select(props: {placeholder:string,noOptionMessage: string, width: number, height: number,selectedIndex:number, options: string[], onChange: (value: any) => void }) {
     const [opened, setOpened] = useState<boolean>(false);// true if select is opened
     const [closed, setClosed] = useState<boolean>(false);// true if select opened then closed
@@ -9,6 +15,24 @@ function Select(props: {placeholder:string,noOptionMessage: string, width: numbe
     const [componentRef, setComponentRef] = useState<React.RefObject<any>>(React.createRef()); // to indicate if user click outside the select component
     const [selectedOption, setSelectedOption] = useState<string>(""); 
 
+    useEffect(() => {
+        setOptions([...props.options])
+        if(props.selectedIndex >= 0){
+            setSelectedOption(props.options[props.selectedIndex])
+        }
+        
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            // on destroy remove event listener 
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [])
+
+
+    /**
+     * handle change on user filter input
+     * @param event 
+     */
     function handleChange(event: any) {
         let userInput = event?.target?.value;
         if (!userInput) {
@@ -29,17 +53,6 @@ function Select(props: {placeholder:string,noOptionMessage: string, width: numbe
         props.onChange(option);
     }
 
-    useEffect(() => {
-        setOptions([...props.options])
-        if(props.selectedIndex >= 0){
-            setSelectedOption(props.options[props.selectedIndex])
-        }
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            // on destroy remove event listener 
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [])
 
 
     function handleClickOutside(event: Event) {

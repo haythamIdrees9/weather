@@ -26,9 +26,14 @@ function Weather() {
         getWeatherData(cities[13]);
     }, [])
 
-    function onChange(e: string) {
-        getWeatherData(e);
+    /**
+     * get city weather information  on select city 
+     */
+    function onSelectCity(city: string) {
+        getWeatherData(city);
     }
+    
+
     function getWeatherData(city: string) {
         if (currentCity === city) {
             return;
@@ -51,29 +56,28 @@ function Weather() {
                 item.day.mintemp_c = Math.round(item.day.mintemp_c);
             }
         }
-
-
         setFlipCard(true);
         setLoading(false);
         setTimeout(() => {
             setItems(result);
             if (dayHourlyIndex !== -1) {
-                setHourlyData(setHourlyDataValue(dayHourlyIndex));
-
+                setHourlyData(getHourlyDataValue(dayHourlyIndex));
             }
-        }, 400)
-        setTimeout(() => {
             setFlipCard(false);
         }, 400)
         setIsLoaded(true);
     }
 
+    /**
+     * on day selected switch to hourly view for selected day
+     * @param index 
+     */
     function onDaySelect(index: number) {
         setFlipCards(true)
         setTimeout(() => {
             setHourlyDisplay(index)
             setFlipCards(false)
-            setHourlyData(setHourlyDataValue(index));
+            setHourlyData(getHourlyDataValue(index));
         }, 400)
 
     }
@@ -82,15 +86,10 @@ function Weather() {
         onDaySelect(-1);
     }
 
-    function setHourlyDataValue(index: number) {
-        if (index >= 3) {
-            index = 0;// I don't get the 5 days data because I need to pay first
-        }
-
+    function getHourlyDataValue(index: number) {
         if (index >= 0) {
             let keyIndex = 0;
             return (
-
                 items.forecast.forecastday[index].hour.map((hour: any) =>
 
                     <div className="f-row j-between hour-data" key={keyIndex++}>
@@ -117,6 +116,7 @@ function Weather() {
         }
     }
 
+    
     function getTimeFormatted(time: number) {
         if (time > 12) {
             return `${time - 12} pm`
@@ -155,7 +155,7 @@ function Weather() {
         weatherUI =
             <div className="container  f-col a-center">
                 <div className="options f-row j-center a-center">
-                    <Select placeholder="Select country..." noOptionMessage="Sorry there is no matched City!!" height={40} width={264} options={cities} selectedIndex={13} onChange={(e) => { onChange(e) }} />
+                    <Select placeholder="Select country..." noOptionMessage="Sorry there is no matched City!!" height={40} width={264} options={cities} selectedIndex={13} onChange={(e) => { onSelectCity(e) }} />
                 </div>
 
                 <div className="tabs-container f-row  j-center" style={{ width: (dayHourlyIndex === -1 && !isCurrentDayInfo) ? '620px' : '430px' }} >
