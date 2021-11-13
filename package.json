@@ -1,7 +1,7 @@
 {
   "name": "my-app",
   "version": "0.1.0",
-  "proxy": "ttp://api.weatherapi.com",
+  "proxy": "https://api.weatherapi.com",
   "dependencies": {
     "@types/node": "^12.20.36",
     "@types/react": "^17.0.34",
